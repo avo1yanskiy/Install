@@ -51,11 +51,11 @@ $ sudo chown -R prome:prome /etc/prometheus/console_libraries
 $ sudo chown -R prome:prom /var/lib/prometheus
 ```
 ## Prometheus Configuration
-```
 $ vim nano /etc/prometheus/prometheus.yml
 
 Next, copy and paste the following lines into the terminal:
 
+```yaml
 global:
   scrape_interval: 15s
 
@@ -70,7 +70,7 @@ scrape_configs:
 
 $ sudo nano /etc/systemd/system/prometheus.service
 
-```
+```bash
 [Unit]
 Description=Prometheus
 Wants=network-online.target
