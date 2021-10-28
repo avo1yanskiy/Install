@@ -1,3 +1,5 @@
+![alt tag](https://github.com/avo1yanskiy/devops-netology/blob/main/virt-homeworks/image/7.4/2.png)
+
 ### install Prometheus & node_exporter
 
 ## Create Prometheus Users
