@@ -1,4 +1,4 @@
-![alt tag](https://github.com/avo1yanskiy/devops-netology/blob/main/virt-homeworks/image/7.4/2.png)
+![alt tag](https://github.com/avo1yanskiy/Install/blob/main/img1.png)
 
 ### install Prometheus & node_exporter
 
