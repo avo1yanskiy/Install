@@ -170,3 +170,7 @@ sudo systemctl restart prometheus
 ```
 
 Check http://ip-address:9090
+
+
+Take instruction https://linuxhint.com/install_prometheus_ubuntu/ 
+p/s thx...
