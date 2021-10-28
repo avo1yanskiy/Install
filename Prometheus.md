@@ -30,9 +30,11 @@ tar xvf prometheus-2.0.0.linux-amd64.tar.gz
 ## Copy prometheus & promtool
 
 $ sudo cp prometheus-2.0.0.linux-amd64/prometheus /usr/local/bin/
+
 $ sudo cp prometheus-2.0.0.linux-amd64/promtool /usr/local/bin/
 
 ## chown
 
 $ sudo chown prome:prome /usr/local/bin/prometheus
+
 $ sudo chown prome:prome /usr/local/bin/promtool
