@@ -1,6 +1,6 @@
 ![alt tag](https://github.com/avo1yanskiy/Install/blob/main/img1.png)
 
-### install Prometheus & node_exporter
+### Install Prometheus & node_exporter
 
 ## Create Prometheus Users
 ```
