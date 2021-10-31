@@ -11,7 +11,7 @@
         src: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
         dest: /tmp
         remote_src: yes
-- name:
+- name: Create
   hosts: prod
   tasks:
     - name: Create Prometheus Directories
@@ -40,3 +40,51 @@
       ansible.builtin.user:
        name: node_exporter
        comment: node_exporter
+- name: Copy directory & file
+  hosts: prod
+  tasks:
+    - name: Copy-1
+      become: yes
+      ansible.builtin.copy:
+       src: /home/parallels/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
+       path: /etc/prometheus      
+       owner: prome
+       group: prome
+       recurse: yes
+       mode: '0644'
+    - name: Copy-2
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/prometheus-2.30.3.linux-amd64/consoles
+       path: /etc/prometheus      
+       owner: prome
+       group: prome
+       recurse: yes
+       mode: '0644'
+    - name: Copy-3
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
+       path: /etc/prometheus      
+       owner: prome
+       group: prome
+       recurse: yes
+       mode: '0644'
+    - name: Copy-4
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/prometheus-2.30.3.linux-amd64/consoles
+       path: /usr/local/bin/     
+       owner: prome
+       group: prome
+       recurse: yes
+       mode: '0644'
+    - name: Copy-5
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
+       path: /usr/local/bin/
+       owner: prome
+       group: prome
+       recurse: yes
+       mode: '0644'
