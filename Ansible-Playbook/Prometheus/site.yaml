@@ -39,4 +39,4 @@
       become: yes
       ansible.builtin.user:
        name: node_exporter
-       comment: Node_exporter
+       comment: node_exporter
