@@ -34,9 +34,7 @@
       ansible.builtin.user:
        name: prome
        comment: prometheus
-       group: prome
     - name: Node_exporter user
       ansible.builtin.user:
        name: node_exporter
        comment: Node_exporter
-       group: node_exporter
