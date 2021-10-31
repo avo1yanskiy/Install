@@ -34,11 +34,9 @@
       ansible.builtin.user:
        name: prome
        comment: prometheus
-       uid: prome
        group: prome
     - name: Node_exporter user
       ansible.builtin.user:
        name: node_exporter
        comment: Node_exporter
-       uid: node_exporter
        group: node_exporter
