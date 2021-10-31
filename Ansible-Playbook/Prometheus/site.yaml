@@ -1,0 +1,58 @@
+---
+- name: Motd
+  hosts: prod
+  tasks:
+    - name: Upload local-storage-file-dymotd.sh
+      become: yes
+      copy:
+        src: /home/parallels/git/sdvps-homeworks/ansible/7.2/files/dymotd.sh
+        dest: /usr/local/sbin/dymotd.sh
+    - name: Chmod file dymotd.sh
+      become: yes
+      ansible.builtin.file:
+        path: /usr/local/sbin/dymotd.sh
+        mode: a+x
+    - name: Add line profile
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/profile
+        line: /usr/local/sbin/dymotd.sh
+    - name: Upload local-storage-file-bash.sh
+      become: yes
+      copy:
+        src: /home/parallels/git/sdvps-homeworks/ansible/7.2/files/html.sh
+        dest: /tmp    
+    - name: Chmod file html.sh
+      become: yes
+      ansible.builtin.file:
+        path: /tmp/html.sh
+        mode: a+x
+- name: Execute
+  hosts: prod
+  tasks:
+    - name: script
+      become: yes
+      command: sh /tmp/html.sh
+- name: Apache
+  hosts: prod
+  tasks:
+    - name: Install Apache
+      become: yes
+      yum:
+        name: httpd
+        state: latest
+    - name: Copy index.html
+      become: yes
+      ansible.builtin.copy:
+        src: /tmp/index.html
+        dest: /tmp/index.html1
+        remote_src: yes
+- name: Start service
+  hosts: prod
+  tasks:      
+    - name: Start apache
+      become: yes
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
