@@ -17,10 +17,12 @@
     - name: Create Prometheus Directories
       become: yes
       ansible.builtin.file:
+       state: directory
        path: /etc/prometheus
     - name: Change file ownership, group and permissions
       become: yes
       ansible.builtin.file:
+       state: directory
        path: /var/lib/prometheus
      #  owner: foo
      #  group: foo
