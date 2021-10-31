@@ -1,5 +1,5 @@
 ---
-- name: Check & Gathering
+- name: Check & Gathering Facts
   hosts: prod
   tasks:
     - name: Download Promethtus
@@ -11,3 +11,32 @@
         src: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
         dest: /tmp
         remote_src: yes
+- name:
+  hosts: prod
+  tasks:
+    - name: Create Prometheus Directories
+      become: yes
+      ansible.builtin.file:
+      path: /etc/prometheus
+    - name: Change file ownership, group and permissions
+      become: yes
+      ansible.builtin.file:
+      path: /var/lib/prometheus
+     #  owner: foo
+     #  group: foo
+     #  mode: '0644'
+- name:
+  hosts: prod
+  tasks:
+    - name: Prometheus User
+      ansible.builtin.user:
+      name: prome
+      comment: prometheus
+      uid: prome
+      group: prome
+    - name: Node_exporter user
+      ansible.builtin.user:
+      name: node_exporter
+      comment: Node_exporter
+      uid: node_exporter
+      group: node_exporter
