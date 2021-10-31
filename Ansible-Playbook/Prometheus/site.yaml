@@ -31,10 +31,12 @@
   hosts: prod
   tasks:
     - name: Prometheus User
+      become: yes
       ansible.builtin.user:
        name: prome
        comment: prometheus
     - name: Node_exporter user
+      become: yes
       ansible.builtin.user:
        name: node_exporter
        comment: Node_exporter
