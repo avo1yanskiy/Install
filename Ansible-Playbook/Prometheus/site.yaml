@@ -44,10 +44,9 @@
   hosts: prod
   tasks:
     - name: Copy-1
-      become: yes
       ansible.builtin.copy:
-       src: /home/parallels/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
-       dest: /etc/prometheus
+       src: ~/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
+       dest: /tmp
        owner: prome
        group: prome
        mode: '0644'
@@ -84,6 +83,14 @@
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
        dest: /usr/local/bin/
+       owner: prome
+       group: prome
+       mode: '0644'
+       remote_src: yes
+    - name: Copy-6
+      ansible.builtin.copy:
+       src: /tmp/prometheus.yml
+       dest: /etc/prometheus
        owner: prome
        group: prome
        mode: '0644'
