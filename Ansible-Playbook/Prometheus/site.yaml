@@ -45,7 +45,7 @@
   tasks:
     - name: Copy-1
       ansible.builtin.copy:
-       src: ~/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
+       src: /home/parallels/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
        dest: /tmp
        owner: prome
        group: prome
