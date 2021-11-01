@@ -46,7 +46,7 @@
     - name: Copy-1
       become: yes
       ansible.builtin.copy:
-       src: /etc/git/Ansible-Playbook/Prometheus/files/prometheus.yml
+       src: /etc/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
        dest: /etc/prometheus
        owner: prome
        group: prome
