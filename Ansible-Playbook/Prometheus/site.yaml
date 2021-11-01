@@ -103,7 +103,6 @@
     - name: Restart service cron on centos
       become: yes
       ansible.builtin.systemd:
-        state: restarted
         daemon_reload: yes
     - name: prometheus serives start
       become: yes
