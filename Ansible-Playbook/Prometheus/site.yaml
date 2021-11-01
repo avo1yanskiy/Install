@@ -92,13 +92,11 @@
       ansible.builtin.copy:
        src: prometheus.service
        dest: /etc/systemd/system/
-       remote_src: yes
     - name: Copy-7
       become: yes
       ansible.builtin.copy:
        src: node_exporter.service
-       dest: /etc/systemd/system/
-       remote_src: yes
+       dest: /etc/systemd/system/   
 - name: Start Service
   hosts: prod
   tasks:
