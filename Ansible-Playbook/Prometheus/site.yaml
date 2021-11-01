@@ -43,15 +43,15 @@
 - name: Copy directory & file
   hosts: prod
   tasks:
-    - name: Copy-1
-      become: yes
-      ansible.builtin.copy:
-       src: ~/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
-       path: /etc/prometheus
-       owner: prome
-       group: prome
-       recurse: yes
-       mode: '0644'
+  #  - name: Copy-1
+  #    become: yes
+  #    ansible.builtin.copy:
+  #     src: ~/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
+  #     path: /etc/prometheus
+  #     owner: prome
+  #     group: prome
+  #     recurse: yes
+  #     mode: '0644'
     - name: Copy-2
       become: yes
       ansible.builtin.copy:
