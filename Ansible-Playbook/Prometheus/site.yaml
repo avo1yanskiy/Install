@@ -43,20 +43,20 @@
 - name: Copy directory & file
   hosts: prod
   tasks:
-  #  - name: Copy-1
-  #    become: yes
-  #    ansible.builtin.copy:
-  #     src: ~/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
-  #     path: /etc/prometheus
-  #     owner: prome
-  #     group: prome
-  #     recurse: yes
-  #     mode: '0644'
+    - name: Copy-1
+      become: yes
+      ansible.builtin.copy:
+       src: ~/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
+       dest: /etc/prometheus
+       owner: prome
+       group: prome
+       recurse: yes
+       mode: '0644'
     - name: Copy-2
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/consoles
-       path: /etc/prometheus      
+       dest: /etc/prometheus      
        owner: prome
        group: prome
        recurse: yes
@@ -65,7 +65,7 @@
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
-       path: /etc/prometheus      
+       dest: /etc/prometheus      
        owner: prome
        group: prome
        recurse: yes
@@ -74,7 +74,7 @@
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/consoles
-       path: /usr/local/bin/     
+       dest: /usr/local/bin/     
        owner: prome
        group: prome
        recurse: yes
@@ -83,7 +83,7 @@
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
-       path: /usr/local/bin/
+       dest: /usr/local/bin/
        owner: prome
        group: prome
        recurse: yes
