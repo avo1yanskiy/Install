@@ -39,7 +39,7 @@
        path: /var/lib/prometheus
        owner: prome
        group: prome
-     # mode: '0644'
+       mode: '777'
 - name: Copy directory & file
   hosts: prod
   tasks:
@@ -50,7 +50,7 @@
        dest: /etc/prometheus/prometheus.yml
        owner: prome
        group: prome
-    #  mode: '0644'
+       mode: '777'
     - name: Copy-2
       become: yes
       ansible.builtin.copy:
@@ -58,7 +58,7 @@
        dest: /etc/prometheus      
        owner: prome
        group: prome
-     # mode: '0644'
+       mode: '777'
        remote_src: yes
     - name: Copy-3
       become: yes
@@ -67,7 +67,7 @@
        dest: /etc/prometheus      
        owner: prome
        group: prome
-    # mode: '0644'
+       mode: '777'
        remote_src: yes
     - name: Copy-4
       become: yes
@@ -76,7 +76,7 @@
        dest: /usr/local/bin/     
        owner: prome
        group: prome
-    #   mode: '0644'
+       mode: '777'
        remote_src: yes
     - name: Copy-5
       become: yes
@@ -85,7 +85,7 @@
        dest: /usr/local/bin/
        owner: prome
        group: prome
-     #  mode: '0644'
+       mode: '777'
        remote_src: yes
     - name: Copy-6
       become: yes
