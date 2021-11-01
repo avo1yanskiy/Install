@@ -47,7 +47,7 @@
       become: yes
       ansible.builtin.copy:
        src: /etc/git/Install/Ansible-Playbook/Prometheus/files/prometheus.yml
-       dest: /etc/prometheus
+       dest: /etc/prometheus/prometheus.yml
        owner: prome
        group: prome
        mode: '0644'
