@@ -1,4 +1,4 @@
-![alt tag](https://github.com/avo1yanskiy/Install/blob/main/img1.png)
+![alt tag](https://github.com/avo1yanskiy/Install/blob/main/img/img1.png)
 
 ### Install Prometheus & node_exporter
 
