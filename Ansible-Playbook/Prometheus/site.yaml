@@ -50,7 +50,6 @@
        dest: /etc/prometheus
        owner: prome
        group: prome
-       recurse: yes
        mode: '0644'
     - name: Copy-2
       become: yes
@@ -59,7 +58,6 @@
        dest: /etc/prometheus      
        owner: prome
        group: prome
-       recurse: yes
        mode: '0644'
     - name: Copy-3
       become: yes
@@ -68,7 +66,6 @@
        dest: /etc/prometheus      
        owner: prome
        group: prome
-       recurse: yes
        mode: '0644'
     - name: Copy-4
       become: yes
@@ -77,7 +74,6 @@
        dest: /usr/local/bin/     
        owner: prome
        group: prome
-       recurse: yes
        mode: '0644'
     - name: Copy-5
       become: yes
@@ -86,5 +82,4 @@
        dest: /usr/local/bin/
        owner: prome
        group: prome
-       recurse: yes
        mode: '0644'
