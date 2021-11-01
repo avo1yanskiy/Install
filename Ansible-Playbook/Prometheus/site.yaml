@@ -51,6 +51,7 @@
        owner: prome
        group: prome
        mode: '0644'
+       remote_src: yes
     - name: Copy-2
       become: yes
       ansible.builtin.copy:
@@ -59,6 +60,7 @@
        owner: prome
        group: prome
        mode: '0644'
+       remote_src: yes
     - name: Copy-3
       become: yes
       ansible.builtin.copy:
@@ -67,6 +69,7 @@
        owner: prome
        group: prome
        mode: '0644'
+       remote_src: yes
     - name: Copy-4
       become: yes
       ansible.builtin.copy:
@@ -75,6 +78,7 @@
        owner: prome
        group: prome
        mode: '0644'
+       remote_src: yes
     - name: Copy-5
       become: yes
       ansible.builtin.copy:
@@ -83,3 +87,4 @@
        owner: prome
        group: prome
        mode: '0644'
+       remote_src: yes
