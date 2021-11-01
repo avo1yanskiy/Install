@@ -24,9 +24,9 @@
       ansible.builtin.file:
        state: directory
        path: /var/lib/prometheus
-     #  owner: foo
-     #  group: foo
-     #  mode: '0644'
+       owner: prome
+       group: prome
+       mode: '0644'
 - name:
   hosts: prod
   tasks:
@@ -72,7 +72,7 @@
     - name: Copy-4
       become: yes
       ansible.builtin.copy:
-       src: /tmp/prometheus-2.30.3.linux-amd64/consoles
+       src: /tmp/prometheus-2.30.3.linux-amd64/promtool
        dest: /usr/local/bin/     
        owner: prome
        group: prome
@@ -81,9 +81,32 @@
     - name: Copy-5
       become: yes
       ansible.builtin.copy:
-       src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
+       src: /tmp/prometheus-2.30.3.linux-amd64/prometheus
        dest: /usr/local/bin/
        owner: prome
        group: prome
        mode: '0644'
        remote_src: yes
+    - name: Copy-6
+      become: yes
+      ansible.builtin.copy:
+       src: prometheus.service
+       dest: /etc/systemd/system/
+       remote_src: yes
+    - name: Copy-7
+      become: yes
+      ansible.builtin.copy:
+       src: node_exporter.service
+       dest: /etc/systemd/system/
+       remote_src: yes
+- name: Start Service
+  hosts: prod
+  tasks:
+    - name: prometheus serives start
+      become: yes
+      ansible.builtin.service:
+        name: prometheus
+        state: started
+        enabled: yes
+
+       
