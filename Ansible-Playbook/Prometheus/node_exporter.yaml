@@ -37,7 +37,7 @@
         name: node_exporter
         state: started
         enabled: yes
-        - name: prometheus serives start
+    - name: prometheus serives start
       become: yes
       ansible.builtin.service:
         name: prometheus
