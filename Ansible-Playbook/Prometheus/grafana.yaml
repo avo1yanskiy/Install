@@ -15,6 +15,6 @@
     - name: grafana serives restart
       become: yes
       ansible.builtin.service:
-        name: grafana
+        name: grafana-server
         state: started
         enabled: yes
