@@ -1,12 +1,12 @@
 Playbook Prometheus-node_exporter & grafana
 =========
 
-Роль для установки Kibana на хостах с ОС: Debian, Ubuntu, CentOS, RHEL.
+Роль для установки prometheus на хостах с ОС:CentOS, RHEL.
 
 Requirements
 ------------
 
-Поддерживаются только ОС семейств debian и RHEL.
+Поддерживаются только ОС семейств RHEL.
 
 Playbook Variables
 --------------
