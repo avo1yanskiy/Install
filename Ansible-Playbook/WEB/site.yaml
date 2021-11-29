@@ -2,70 +2,9 @@
 - name: Check & Gathering Facts
   hosts: prod
   tasks:
-    - name: Download Promethtus
-      get_url:
-        url: https://github.com/prometheus/prometheus/releases/download/v2.30.3/prometheus-2.30.3.linux-amd64.tar.gz
-        dest: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
-    - name: Unarchive Prometheus
-      ansible.builtin.unarchive:
-        src: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
-        dest: /tmp
-        remote_src: yes
-- name:
-  hosts: prod
-  tasks:
-    - name: Prometheus User
+    - name: INSTALL UPDATE ALL SYSTEM
       become: yes
-      ansible.builtin.user:
-       name: prome
-       comment: prometheus
-    - name: Node_exporter user
-      become: yes
-      ansible.builtin.user:
-       name: node_exporter
-       comment: node_exporter
-- name: Create
-  hosts: prod
-  tasks:
-    - name: Create Prometheus Directories
-      become: yes
-      ansible.builtin.file:
-       state: directory
-       path: /etc/prometheus
-    - name: Change file ownership, group and permissions
-      become: yes
-      ansible.builtin.file:
-       state: directory
-       path: /var/lib/prometheus
-       owner: prome
-       group: prome
-       mode: '777'
-- name: Copy directory & file
-  hosts: prod
-  tasks:
-    - name: Copy-1
-      become: yes
-      ansible.builtin.copy:
-       src: prometheus.yml
-       dest: /etc/prometheus/prometheus.yml
-       owner: prome
-       group: prome
-       mode: '777'
-    - name: Copy-2
-      become: yes
-      ansible.builtin.copy:
-       src: /tmp/prometheus-2.30.3.linux-amd64/consoles
-       dest: /etc/prometheus      
-       owner: prome
-       group: prome
-       mode: '777'
-       remote_src: yes
-    - name: Copy-3
-      become: yes
-      ansible.builtin.copy:
-       src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
-       dest: /etc/prometheus      
-       owner: prome
-       group: prome
-       mode: '777'
-       remote_src: yes
+      yum:
+        name: update
+        state: present
+

@@ -2,22 +2,22 @@
 all:
   hosts:
   vars:
-    ansible_connection: ssh
-    ansible_ssh_user: vagrant
-    ansible_ssh_private_key_file: ~/.ssh/id_rsa.pub
+    ansible_connection: ssh      # Подключение по ссх
+    ansible_ssh_user: vagrant    # Имя пользоваля
+    ansible_ssh_private_key_file: ~/.ssh/id_rsa.pub  # Где лежит ключик
     server-01:
       ansible_host: 178.154.225.255
-    #server-02:
-    #  ansible_host: 178.154.255.6
+    server-02:
+      ansible_host: 178.154.255.6
 prod:
   hosts:
     server-01:
       ansible_host: 178.154.225.255
-    #server-02:
-    #  ansible_host: 178.154.255.6
+    server-02:
+      ansible_host: 178.154.255.6
 test:
   hosts:
     server-01:
       ansible_host: 178.154.225.255
-    #server-02:
-    #  ansible_host: 178.154.255.6
+    server-02:
+      ansible_host: 178.154.255.6
