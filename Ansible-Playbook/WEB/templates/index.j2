@@ -1,7 +1,6 @@
 <html>
 <center>
-   <h1> The hostname of this webserver is {{ ansible_hostname }}</h1>
-   <h3> It is running on {{ ansible_default_ipv4.address }} system </h3>
-   <h3> Тестирование HAPROXY</h3>
+   <h1> Привет, я сервер {{ ansible_hostname }}</h1>
+   <h3> У меня следующий IP адрес внутри сети {{ ansible_default_ipv4.address }}  </h3>
 </center>
 </html>
