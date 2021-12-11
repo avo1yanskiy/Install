@@ -1,4 +1,4 @@
-###   НАДО ЗАКОНЧИТЬ!!!
+###   Скачивает и установливает Node_Exporter
 - name: Check & Gathering Facts
   hosts: prod
   tasks:
