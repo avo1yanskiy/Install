@@ -3,6 +3,8 @@ Playbook Prometheus-node_exporter & grafana
 
 Роль для установки prometheus на хостах с ОС:CentOS, RHEL.
 
+Путь запуска, сначала запускаем Playbook site.yaml, после node_exporter.yaml за ним grafana.yaml (нужно чутка доработать в роль)
+
 Requirements
 ------------
 
