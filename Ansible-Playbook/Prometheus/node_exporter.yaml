@@ -1,3 +1,4 @@
+###   НАДО ЗАКОНЧИТЬ!!!
 - name: Check & Gathering Facts
   hosts: prod
   tasks:
