@@ -35,12 +35,12 @@
 
   tasks:
       - name: Centos
-      block:
+        block:
       - name: "Install packages"
-      dnf: "name={{ item }} state=present"
-      with_items:
-        - postgresql
-        - postgresql-server
+        dnf: "name={{ item }} state=present"
+        with_items:
+          - postgresql
+          - postgresql-server
 
       - name: "Install packages"
         yum : "name={{ item }} state=present"
