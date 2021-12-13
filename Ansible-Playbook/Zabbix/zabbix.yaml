@@ -7,13 +7,12 @@
         url: https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
         dest: /tmp
     - name: pkdg
+      become: yes
       dpkg_selections:
         name: /tmp/zabbix-release_5.0-1+focal_all.deb
         selection: install
     - name: Update all packages to their latest version
+      become: yes
       apt:
         name: "*"
         state: latest
-
-
-      
