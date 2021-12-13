@@ -33,7 +33,7 @@
         apt: upgrade=dist force_apt_get=yes
         when: ansible_facts['os_family'] == 'Ubuntu'
 
-    tasks:
+  tasks:
       - name: Centos
       block:
       - name: "Install packages"
