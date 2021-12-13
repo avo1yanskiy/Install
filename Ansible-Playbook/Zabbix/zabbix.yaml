@@ -1,14 +1,12 @@
 ---
 - name: Playbook
   hosts: prod
+  become: yes
   
   pre_tasks:
-    - name: "Install packages"
-      become: yes
+    - name: "Install update Server"
       apt:
-        name:
-          - postgresql
-          - postgresql-contrib
+        update_cache: yes
   
   tasks:
     - name: Download Zabbix
@@ -16,12 +14,13 @@
         url: https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
         dest: /tmp
     - name: pkdg
-      become: yes
       apt: deb="/tmp/zabbix-release_5.0-1+focal_all.deb"
-    - name: Run the equivalent of "apt-get update" as a separate step
-      become: yes
+      
+    - name: Update all packages to their latest version
       apt:
-        update_cache: yes
+        name: "*"
+        state: latest
+      
     - name: Install zabbix
       become: yes
       apt:
@@ -33,23 +32,6 @@
         - zabbix-agent
         - python3-psycopg2
 
-    - name: "Start and enable services"
-      become: yes
-      service: "name={{ item }} state=started enabled=yes"
-      with_items:
-        - postgresql
-
-    - name: "Find out if PostgreSQL is initialized"
-      become: yes
-      ansible.builtin.stat:
-        path: "/var/lib/pgsql/data/pg_hba.conf"
-      register: postgres_data
-
-    - name: "Initialize PostgreSQL"
-      become: yes
-      shell: "postgresql-setup initdb"
-      when: not postgres_data.stat.exists
- 
     - name: "Create zabbix database"
       become: yes
       become_user: postgres
@@ -74,15 +56,3 @@
         roles: zabbix
         grant_option: no
         privs: all
-
-    - name: "Allow md5 connection for the db user"
-      become: yes
-      become_user: postgres
-      postgresql_pg_hba:
-        dest: "~/data/pg_hba.conf"
-        contype: host
-        databases: all
-        method: md5
-        users: zabbix
-        create: true
-      notify: restart postgres
