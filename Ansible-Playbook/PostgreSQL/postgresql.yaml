@@ -3,7 +3,7 @@
   hosts: prod
 
   vars_files:
-    - vars.yml
+    - vars.yaml
 
   pre_tasks:
     - name: "Install packages"
