@@ -1,37 +1,59 @@
 ---
-- name: PLAY
+- name: Install PostgreSQL & deploy dababase & User
   hosts: prod
+  become: yes
   pre_tasks:
     - name: Enable EPEL Repository on CentOS 8
-      become: yes
-      yum:
+      dnf:
         name: epel-release
         state: latest
+      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '8'
     - name: Upgrade all packages
       yum:
         name: '*'
         state: latest
       when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '8'
+
     - name: Enable EPEL Repository on CentOS 7
-      become: yes
       yum:
         name: epel-release
         state: latest
+      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
     - name: Upgrade all packages
       yum:
         name: '*'
         state: latest
       when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
+
     - name: Update apt-get repo and cache
-      become: yes
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-      when: ansible_facts['os_family'] == 'Ubuntu'
+      when: ansible_facts['os_family'] == 'Debian'
+
     - name: Upgrade all apt packages
       apt: upgrade=dist force_apt_get=yes
-      when: ansible_facts['os_family'] == 'Ubuntu'
+      when: ansible_facts['os_family'] == 'Debian'
   tasks:
     - name: debug
       ansible.builtin.debug:
         msg: "Hello world!"
+    - name: INSTALL HTTPS-APACHE
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: HTTPD-CENT8
+      dnf:
+        name: httpd
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '8'
+    - name: HTTPD-CENT7
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
     
+
+
+
+
 
