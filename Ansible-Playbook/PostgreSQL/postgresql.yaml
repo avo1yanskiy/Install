@@ -2,8 +2,8 @@
 - name: Start Playbook
   hosts: prod
 
-vars_files:
-    - vars.yml
+  vars_files:
+    - vars.yaml
 
   pre_tasks:
     - name: "Install packages"
@@ -36,6 +36,7 @@ vars_files:
         - postgresql
 
     - name: "Create app database"
+      become: yes
       postgresql_db:
         state: present
         name: "{{ db_name }}"
@@ -43,6 +44,7 @@ vars_files:
       become_user: postgres
 
     - name: "Create db user"
+      become: yes
       postgresql_user:
         state: present
         name: "{{ db_user }}"
