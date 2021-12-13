@@ -3,7 +3,6 @@
   become: yes
   pre_tasks:
     - name: Enable EPEL Repository on CentOS 8
-      block:
       become: yes
       yum:
         name: epel-release
@@ -14,7 +13,6 @@
         state: latest
       when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '8'
     - name: Enable EPEL Repository on CentOS 7
-      block:
       become: yes
       yum:
         name: epel-release
@@ -25,7 +23,6 @@
         state: latest
       when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
     - name: Update apt-get repo and cache
-      block:
       become: yes
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
       when: ansible_facts['os_family'] == 'Ubuntu'
