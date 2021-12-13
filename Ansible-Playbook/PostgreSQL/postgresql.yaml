@@ -2,7 +2,7 @@
 - hosts: all
   become: yes
   pre_tasks:
-  - name: Enable EPEL Repository on CentOS 8
+    - name: Enable EPEL Repository on CentOS 8
       become: yes
       dnf:
         name: epel-release
