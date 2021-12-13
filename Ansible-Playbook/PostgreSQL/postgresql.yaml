@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: prod
   become: yes
   pre_tasks:
     - name: Enable EPEL Repository on CentOS 8
@@ -32,4 +32,8 @@
     - name: Upgrade all apt packages
       apt: upgrade=dist force_apt_get=yes
       when: ansible_facts['os_family'] == 'Ubuntu'
+  tasks:
+    ansible.builtin.debug:
+    msg: Vse kruto!
+    
 
