@@ -1,71 +1,60 @@
 ---
-- name: Start Playbook
-  hosts: prod
+- hosts: all
+  become: yes
 
   vars_files:
     - vars.yaml
 
   pre_tasks:
     - name: "Install packages"
-      become: yes
       dnf: "name={{ item }} state=present"
       with_items:
         - postgresql
         - postgresql-server
-        - postgresql-contrib
-        - libpq-dev
-        - bash
-        - openssl
-        - libssl-dev
-        - libssl-doc
 
     - name: "Install packages"
-      become: yes
       yum : "name={{ item }} state=present"
       with_items:
         - python3-psycopg2
   tasks:
     - name: "Find out if PostgreSQL is initialized"
-      become: yes
       ansible.builtin.stat:
         path: "/var/lib/pgsql/data/pg_hba.conf"
       register: postgres_data
 
     - name: "Initialize PostgreSQL"
-      become: yes
       shell: "postgresql-setup initdb"
       when: not postgres_data.stat.exists
  
     - name: "Start and enable services"
-      become: yes
-      service: name=postgresql state=started
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - postgresql
 
     - name: "Create app database"
       become: yes
       become_user: postgres
       postgresql_db:
-        name: "{{ db_name }}"
         state: present
-        
+        name: "{{ db_name }}"
 
     - name: "Create db user"
       become: yes
+      become_user: postgres
       postgresql_user:
         state: present
         name: "{{ db_user }}"
         password: "{{ db_password }}"
-      become: yes
-      become_user: postgres
 
     - name: "Grant db user access to app db"
+      become: yes
+      become_user: postgres
       postgresql_privs:
         type: database
         database: "{{ db_name }}"
         roles: "{{ db_user }}"
         grant_option: no
         privs: all
-      become: yes
-      become_user: postgres
 
     - name: "Allow md5 connection for the db user"
       postgresql_pg_hba:
@@ -78,6 +67,11 @@
       become: yes
       become_user: postgres
       notify: restart postgres
+
+    - name: "Add some dummy data to our database"
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name }} < /tmp/dump.sql
 
   handlers:
     - name: restart postgres
