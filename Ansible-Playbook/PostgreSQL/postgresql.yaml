@@ -1,4 +1,5 @@
 ---
+- name: Playbook
 - hosts: prod
   become: yes
   pre_tasks:
