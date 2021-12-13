@@ -1,8 +1,41 @@
 ---
 - hosts: all
   become: yes
-
   pre_tasks:
+  - name: Enable EPEL Repository on CentOS 8
+      become: yes
+      dnf:
+        name: epel-release
+        state: latest
+    - name: Upgrade all packages
+      dnf:
+        name: '*'
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '8'
+    - name:  
+    - name: Enable EPEL Repository on CentOS 7
+      become: yes
+      yum:
+        name: epel-release
+        state: latest
+    - name: Upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
+
+    - name: Update apt-get repo and cache
+      become: yes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+      when: ansible_facts['os_family'] == 'Ubuntu'
+
+    - name: Upgrade all apt packages
+      apt: upgrade=dist force_apt_get=yes
+      when: ansible_facts['os_family'] == 'Ubuntu'
+
+  tasks:
+    - name: Centos
+      block:
     - name: "Install packages"
       dnf: "name={{ item }} state=present"
       with_items:
@@ -13,7 +46,8 @@
       yum : "name={{ item }} state=present"
       with_items:
         - python3-psycopg2
-  tasks:
+     when: ansible_facts['distribution'] == 'CentOS'
+  
     - name: "Find out if PostgreSQL is initialized"
       ansible.builtin.stat:
         path: "/var/lib/pgsql/data/pg_hba.conf"
