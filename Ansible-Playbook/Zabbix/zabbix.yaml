@@ -23,12 +23,14 @@
         - zabbix-apache-conf
         - zabbix-agent
         - python3-psycopg2
+        - postgresql
+        - postgresql-server
 
     - name: "Start and enable services"
       service: "name={{ item }} state=started enabled=yes"
       with_items:
         - postgresql
-        
+
     - name: "Find out if PostgreSQL is initialized"
       ansible.builtin.stat:
         path: "/var/lib/pgsql/data/pg_hba.conf"
