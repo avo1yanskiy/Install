@@ -2,7 +2,7 @@
 - name: Playbook
   hosts: prod
   
-    pre_tasks:
+  pre_tasks:
     - name: "Install packages"
       apt: "name={{ item }} state=present"
       with_items:
