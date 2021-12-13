@@ -10,6 +10,7 @@
       become: yes
       apt: deb="/tmp/zabbix-release_5.0-1+focal_all.deb"
     - name: Run the equivalent of "apt-get update" as a separate step
+      become: yes
       apt:
         update_cache: yes
     - name: Install zabbix
