@@ -2,6 +2,13 @@
 - name: Playbook
   hosts: prod
   tasks:
+    pre_tasks:
+    - name: "Install packages"
+      dnf: "name={{ item }} state=present"
+      with_items:
+        - postgresql
+        - postgresql-server
+
     - name: Download Zabbix
       get_url:
         url: https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
@@ -23,8 +30,6 @@
         - zabbix-apache-conf
         - zabbix-agent
         - python3-psycopg2
-        - postgresql
-        - postgresql-server
 
     - name: "Start and enable services"
       service: "name={{ item }} state=started enabled=yes"
