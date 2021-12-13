@@ -14,24 +14,24 @@
           state: latest
         when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '8'
       - name: Enable EPEL Repository on CentOS 7
-      block:
-      become: yes
-      yum:
-        name: epel-release
-        state: latest
+        block:
+        become: yes
+        yum:
+          name: epel-release
+          state: latest
       - name: Upgrade all packages
-      yum:
-        name: '*'
-        state: latest
-      when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
+        yum:
+          name: '*'
+          state: latest
+        when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] == '7'
       - name: Update apt-get repo and cache
-      block:
-      become: yes
-      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-      when: ansible_facts['os_family'] == 'Ubuntu'
+        block:
+        become: yes
+        apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+        when: ansible_facts['os_family'] == 'Ubuntu'
       - name: Upgrade all apt packages
-      apt: upgrade=dist force_apt_get=yes
-      when: ansible_facts['os_family'] == 'Ubuntu'
+        apt: upgrade=dist force_apt_get=yes
+        when: ansible_facts['os_family'] == 'Ubuntu'
 
     tasks:
       - name: Centos
