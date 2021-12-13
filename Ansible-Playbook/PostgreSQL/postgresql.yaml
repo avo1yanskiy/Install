@@ -95,9 +95,9 @@
           method: md5
           users: "{{ db_user }}"
           create: true
-      become: yes
-      become_user: postgres
-      notify: restart postgres
+        become: yes
+        become_user: postgres
+        notify: restart postgres
 
       - name: "Add some dummy data to our database"
         become: true
