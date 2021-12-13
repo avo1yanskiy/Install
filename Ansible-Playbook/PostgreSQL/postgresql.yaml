@@ -2,9 +2,6 @@
 - hosts: all
   become: yes
 
-  vars_files:
-    - vars.yaml
-
   pre_tasks:
     - name: "Install packages"
       dnf: "name={{ item }} state=present"
