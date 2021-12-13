@@ -4,6 +4,7 @@
   
   pre_tasks:
     - name: "Install packages"
+      become: yes
       apt:
         name:
           - postgresql
