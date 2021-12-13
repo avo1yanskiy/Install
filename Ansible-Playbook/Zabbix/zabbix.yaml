@@ -30,8 +30,28 @@
         - php7.4-pgsql
         - zabbix-apache-conf
         - zabbix-agent
-    - name: ansible.builtin.shell
-      ansible.builtin.shell: sudo -u postgres createuser --pwprompt zabbix
-    - name: ad
-      ansible.builtin.shell: sudo -u postgres createdb -O zabbix -E Unicode -T template0 zabbix
+    - name: "Create app database"
+      become: yes
+      become_user: postgres
+      postgresql_db:
+        state: present
+        name: zabbix
+
+    - name: "Create db user"
+      become: yes
+      become_user: postgres
+      postgresql_user:
+        state: present
+        name: zabbix
+        password: dbzabbix
+
+    - name: "Grant db user access to app db"
+      become: yes
+      become_user: postgres
+      postgresql_privs:
+        type: database
+        database: zabbix
+        roles: zabbix
+        grant_option: no
+        privs: all
 
