@@ -1,14 +1,15 @@
 ---
 - name: Playbook
   hosts: prod
-  tasks:
+  
     pre_tasks:
     - name: "Install packages"
       apt: "name={{ item }} state=present"
       with_items:
         - postgresql
         - postgresql-server
-
+  
+    tasks:
     - name: Download Zabbix
       get_url:
         url: https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
