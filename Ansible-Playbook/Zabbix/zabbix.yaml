@@ -22,3 +22,55 @@
         - php7.4-pgsql
         - zabbix-apache-conf
         - zabbix-agent
+        - python3-psycopg2
+
+    - name: "Find out if PostgreSQL is initialized"
+      ansible.builtin.stat:
+        path: "/var/lib/pgsql/data/pg_hba.conf"
+      register: postgres_data
+
+    - name: "Initialize PostgreSQL"
+      shell: "postgresql-setup initdb"
+      when: not postgres_data.stat.exists
+ 
+    - name: "Start and enable services"
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - postgresql
+
+    - name: "Create zabbix database"
+      become: yes
+      become_user: postgres
+      postgresql_db:
+        state: present
+        name: zabbix
+
+    - name: "Create db user"
+      become: yes
+      become_user: postgres
+      postgresql_user:
+        state: present
+        name: zabbix
+        password: dbzabbix
+
+    - name: "Grant db user access to app db"
+      become: yes
+      become_user: postgres
+      postgresql_privs:
+        type: database
+        database: zabbix
+        roles: zabbix
+        grant_option: no
+        privs: all
+
+    - name: "Allow md5 connection for the db user"
+      become: yes
+      become_user: postgres
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: md5
+        users: zabbix
+        create: true
+      notify: restart postgres
