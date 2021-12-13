@@ -104,6 +104,6 @@
         become_user: postgres
         shell: psql {{ db_name }} < /tmp/dump.sql
 
-      handlers:
+  handlers:
       - name: restart postgres
         service: name=postgresql state=restarted 
