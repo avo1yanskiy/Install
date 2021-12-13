@@ -4,10 +4,10 @@
   
   pre_tasks:
     - name: "Install packages"
-      apt: "name={{ item }} state=present"
-      with_items:
-        - postgresql
-        - postgresql-server
+      apt:
+        name:
+          - postgresql
+          - postgresql-contrib
   
   tasks:
     - name: Download Zabbix
