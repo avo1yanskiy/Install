@@ -15,7 +15,7 @@
       become: yes
       ansible.builtin.copy:
        src: /tmp/node_exporter-1.2.2.linux-amd64/node_exporter
-       dest: /usr/local/bin/     
+       dest: /usr/local/bin/
        owner: node_exporter
        group: node_exporter
        mode: '777'
