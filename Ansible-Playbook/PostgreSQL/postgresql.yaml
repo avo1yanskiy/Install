@@ -1,7 +1,6 @@
 ---
-- name: Playbook
+- name: PLAY
   hosts: prod
-  become: yes
   pre_tasks:
     - name: Enable EPEL Repository on CentOS 8
       become: yes
@@ -32,6 +31,6 @@
       when: ansible_facts['os_family'] == 'Ubuntu'
   tasks:
     ansible.builtin.debug:
-      msg: Vse kruto!
+      msg: "Hello world!"
     
 
