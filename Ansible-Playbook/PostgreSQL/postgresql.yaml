@@ -12,6 +12,12 @@
       with_items:
         - postgresql
         - postgresql-server
+        - postgresql-contrib
+        - libpq-dev
+        - bash
+        - openssl
+        - libssl-dev
+        - libssl-doc
 
     - name: "Install packages"
       become: yes
