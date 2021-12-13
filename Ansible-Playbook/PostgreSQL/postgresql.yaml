@@ -44,7 +44,7 @@
       yum : "name={{ item }} state=present"
       with_items:
         - python3-psycopg2
-     when: ansible_facts['distribution'] == 'CentOS'
+      when: ansible_facts['distribution'] == 'CentOS'
   
     - name: "Find out if PostgreSQL is initialized"
       ansible.builtin.stat:
