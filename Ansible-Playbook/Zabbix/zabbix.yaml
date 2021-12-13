@@ -8,11 +8,16 @@
         dest: /tmp
     - name: pkdg
       become: yes
-      dpkg_selections:
-        name: /tmp/zabbix-release_5.0-1+focal_all.deb
-        selection: install
-    - name: Update all packages to their latest version
+      apt: deb="/tmp/zabbix-release_5.0-1+focal_all.deb"
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+    - name: Install zabbix
       become: yes
       apt:
-        name: "*"
-        state: latest
+        name:
+        - zabbix-server-pgsql
+        - zabbix-frontend-php
+        - php7.4-pgsql
+        - zabbix-apache-conf
+        - zabbix-agent
