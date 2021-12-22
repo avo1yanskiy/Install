@@ -102,6 +102,6 @@
         state: restarted
         enabled: yes
 
-#    - name: Alertmanager
-#      include: alertmanager.yaml
+- name: Alertmanager
+  include: alertmanager.yaml
        
