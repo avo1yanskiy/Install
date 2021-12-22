@@ -10,3 +10,10 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['51.250.16.147:9100'] # менять localhost  на нужный IP и порт
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - localhost:9093
