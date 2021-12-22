@@ -52,6 +52,7 @@
        group: prome
        mode: '777'
        remote_src: yes
+
     - name: Copy console_libraries
       become: yes
       ansible.builtin.copy:
@@ -61,6 +62,7 @@
        group: prome
        mode: '777'
        remote_src: yes
+
     - name: Copy promtool
       become: yes
       ansible.builtin.copy:
@@ -70,6 +72,7 @@
        group: prome
        mode: '777'
        remote_src: yes
+
     - name: Copy prometheus
       become: yes
       ansible.builtin.copy:
@@ -79,11 +82,13 @@
        group: prome
        mode: '777'
        remote_src: yes
+
     - name: Copy prometheus.service
       become: yes
       ansible.builtin.copy:
        src: prometheus.service
        dest: /etc/systemd/system/
+       
     - name: Copy node_exporter.service
       become: yes
       ansible.builtin.copy:
