@@ -17,11 +17,13 @@
       ansible.builtin.copy:
        src: /tmp/alertmanager-0.22.2.linux-amd64/alertmanager
        dest: /usr/local/bin/
+       remote_src: yes
     - name: Copy amtool
       become: yes
       ansible.builtin.copy:
        src: /tmp/alertmanager-0.22.2.linux-amd64/amtool
        dest: /usr/local/bin/
+       remote_src: yes
     - name: Copy alertmanager.yml
       become: yes
       ansible.builtin.copy:
@@ -36,6 +38,7 @@
       ansible.builtin.copy:
        src: prometheus-alertmanager.service
        dest: /etc/systemd/system/
+       remote_src: yes
     - name: alertmanager serives restart
       become: yes
       ansible.builtin.service:
