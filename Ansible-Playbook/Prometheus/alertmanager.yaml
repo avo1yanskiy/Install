@@ -3,34 +3,83 @@
 - name: Check & Gathering Facts
   hosts: prod
   tasks:
+    - name: Alertmanager User Create
+      become: yes
+      ansible.builtin.user:
+       name: alertmanager
+       comment: alertmanager
+
+    - name: Create Alertmanager Directories
+      become: yes
+      ansible.builtin.file:
+       state: directory
+       path: /etc/alertmanager
+    
+    - name: Create amtool Directories
+      become: yes
+      ansible.builtin.file:
+       state: directory
+       path: /etc/amtool
+
+    - name: Create Alertmanager Directories
+      become: yes
+      ansible.builtin.file:
+       state: directory
+       path: /var/lib/alertmanager
+
+    - name: Change file ownership, group and permissions
+      become: yes
+      ansible.builtin.file:
+       state: directory
+       path: /var/lib/alertmanager
+       owner: alertmanager
+       group: alertmanager
+       mode: '777'
+    
     - name: Download alertmanager
       get_url:
         url: https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
         dest: /tmp/alertmanager-0.22.2.linux-amd64.tar.gz
-    - name: Unarchive Prometheus
+
+    - name: Unarchive alertmanager
       ansible.builtin.unarchive:
         src: /tmp/alertmanager-0.22.2.linux-amd64.tar.gz
         dest: /tmp
         remote_src: yes
+
     - name: Copy alertmanager
       become: yes
       ansible.builtin.copy:
        src: /tmp/alertmanager-0.22.2.linux-amd64/alertmanager
        dest: /usr/local/bin/
+       owner: alertmanager
+       group: alertmanager
+       mode: '777'
        remote_src: yes
+
+    - name: Copy alertmanager
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/alertmanager-0.22.2.linux-amd64/alertmanager
+       dest: /etc/alertmanager
+       owner: alertmanager
+       group: alertmanager
+       mode: '777'
+       remote_src: yes
+    
     - name: Copy amtool
       become: yes
       ansible.builtin.copy:
-       src: /tmp/alertmanager-0.22.2.linux-amd64/amtool
-       dest: /usr/local/bin/
-       remote_src: yes
+       src: config.yml
+       dest: /etc/amtool
+       
     - name: Copy alertmanager.yml
       become: yes
       ansible.builtin.copy:
        src: /tmp/alertmanager-0.22.2.linux-amd64//alertmanager.yml
-       dest: /etc/prometheus      
-       owner: prome
-       group: prome
+       dest: /etc/alertmanager  
+       owner: alertmanager
+       group: alertmanager
        mode: '777'
        remote_src: yes
     - name: Copy prometheus-alertmanager.service
