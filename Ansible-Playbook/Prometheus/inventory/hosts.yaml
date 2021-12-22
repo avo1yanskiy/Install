@@ -2,18 +2,18 @@
 all:
   hosts:
     server-01:
-      ansible_host: 51.250.19.145
+      ansible_host: 51.250.20.239
     #server-02:
     #  ansible_host: 178.154.255.6
 prod:
   hosts:
     server-01:
-      ansible_host: 51.250.18.140
+      ansible_host: 51.250.20.239
     #server-02:
     #  ansible_host: 178.154.255.6
 cliet:
   hosts:
     client-01:
-      ansible_host: 51.250.19.145
+      ansible_host: 51.250.16.147
     #client-02:
     #  ansible_host: 178.154.255.6
