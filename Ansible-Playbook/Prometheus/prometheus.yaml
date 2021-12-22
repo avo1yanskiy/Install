@@ -13,22 +13,19 @@
         src: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
         dest: /tmp
         remote_src: yes
-- name: User
-  hosts: prod
-  tasks:
+
     - name: Prometheus User
       become: yes
       ansible.builtin.user:
        name: prome
        comment: prometheus
-- name: Create
-  hosts: prod
-  tasks:
+
     - name: Create Prometheus Directories
       become: yes
       ansible.builtin.file:
        state: directory
        path: /etc/prometheus
+
     - name: Change file ownership, group and permissions
       become: yes
       ansible.builtin.file:
@@ -37,9 +34,7 @@
        owner: prome
        group: prome
        mode: '777'
-- name: Copy directory & file
-  hosts: prod
-  tasks:
+
     - name: Cory prometheus.yml
       become: yes
       ansible.builtin.copy:
@@ -94,19 +89,19 @@
       ansible.builtin.copy:
        src: node_exporter.service
        dest: /etc/systemd/system/   
-- name: Start Service
-  hosts: prod
-  tasks:
+
     - name: Restart service cron on centos
       become: yes
       ansible.builtin.systemd:
         daemon_reload: yes
+
     - name: prometheus serives restart
       become: yes
       ansible.builtin.service:
         name: prometheus
         state: restarted
         enabled: yes
-    - name: Alertmanager
-      include: alertmanager.yaml
+
+#    - name: Alertmanager
+#      include: alertmanager.yaml
        
