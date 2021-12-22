@@ -6,9 +6,9 @@ EnvironmentFile=-/etc/default/alertmanager
 User=prome
 Group=prome
 Type=simple
-ExecStart=/usr/local/bin/alertmanager \
-     --config.file=/etc/prometheus/alertmanager.yml \
-     --storage.path=/var/lib/prometheus/alertmanager $ARGS
+ExecStart=/usr/local/bin/alertmanager 
+--config.file=/etc/prometheus/alertmanager.yml 
+--storage.path=/var/lib/prometheus/alertmanager $ARGS
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 [Install]
