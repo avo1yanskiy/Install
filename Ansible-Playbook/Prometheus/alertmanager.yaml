@@ -1,0 +1,46 @@
+### alertmanager
+---
+- name: Check & Gathering Facts
+  hosts: prod
+  tasks:
+    - name: Download alertmanager
+      get_url:
+        url: https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
+        dest: /tmp/alertmanager-0.22.2.linux-amd64.tar.gz
+    - name: Unarchive Prometheus
+      ansible.builtin.unarchive:
+        src: /tmp/alertmanager-0.22.2.linux-amd64.tar.gz
+        dest: /tmp
+        remote_src: yes
+    - name: Copy alertmanager
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/alertmanager-0.22.2.linux-amd64/alertmanager
+       dest: /usr/local/bin/
+    - name: Copy amtool
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/alertmanager-0.22.2.linux-amd64/amtool
+       dest: /usr/local/bin/
+    - name: Copy alertmanager.yml
+      become: yes
+      ansible.builtin.copy:
+       src: /tmp/alertmanager-0.22.2.linux-amd64//alertmanager.yml
+       dest: /etc/prometheus      
+       owner: prome
+       group: prome
+       mode: '777'
+       remote_src: yes
+    - name: Copy prometheus-alertmanager.service
+      become: yes
+      ansible.builtin.copy:
+       src: prometheus-alertmanager.service
+       dest: /etc/systemd/system/
+    - name: alertmanager serives restart
+      become: yes
+      ansible.builtin.service:
+        name: alertmanager
+        state: restarted
+        enabled: yes
+    
+    

@@ -38,7 +38,7 @@
 - name: Copy directory & file
   hosts: prod
   tasks:
-    - name: Copy-1
+    - name: Cory prometheus.yml
       become: yes
       ansible.builtin.copy:
        src: prometheus.yml
@@ -46,7 +46,7 @@
        owner: prome
        group: prome
        mode: '777'
-    - name: Copy-2
+    - name: Copy consoles
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/consoles
@@ -55,7 +55,7 @@
        group: prome
        mode: '777'
        remote_src: yes
-    - name: Copy-3
+    - name: Copy console_libraries
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/console_libraries
@@ -64,7 +64,7 @@
        group: prome
        mode: '777'
        remote_src: yes
-    - name: Copy-4
+    - name: Copy promtool
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/promtool
@@ -73,7 +73,7 @@
        group: prome
        mode: '777'
        remote_src: yes
-    - name: Copy-5
+    - name: Copy prometheus
       become: yes
       ansible.builtin.copy:
        src: /tmp/prometheus-2.30.3.linux-amd64/prometheus
@@ -82,12 +82,12 @@
        group: prome
        mode: '777'
        remote_src: yes
-    - name: Copy-6
+    - name: Copy prometheus.service
       become: yes
       ansible.builtin.copy:
        src: prometheus.service
        dest: /etc/systemd/system/
-    - name: Copy-7
+    - name: Copy node_exporter.service
       become: yes
       ansible.builtin.copy:
        src: node_exporter.service
