@@ -7,12 +7,13 @@
       ansible.builtin.user:
        name: node_exporter
        comment: node_exporter
-    - name: Unarchive Prometheus
 
     - name: Download node_exporter
       get_url:
         url: https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
         dest: /tmp/node_exporter-1.2.2.linux-amd64.tar.gz
+        
+    - name: Unarchive Prometheus
       ansible.builtin.unarchive:
         src: /tmp/node_exporter-1.2.2.linux-amd64.tar.gz
         dest: /tmp
