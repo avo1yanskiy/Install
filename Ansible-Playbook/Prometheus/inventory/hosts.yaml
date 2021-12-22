@@ -11,9 +11,9 @@ prod:
       ansible_host: 51.250.18.140
     #server-02:
     #  ansible_host: 178.154.255.6
-test:
+cliet:
   hosts:
-    server-01:
+    client-01:
       ansible_host: 51.250.19.145
-    #server-02:
+    #client-02:
     #  ansible_host: 178.154.255.6
