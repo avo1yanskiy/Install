@@ -18,6 +18,11 @@ Playbook Variables
 | prometheus-2.30.3 | prometheus-2.30.3 | установка prometheus-2.30.3 |
 | node_exporter | node_exporter | установка node_exporter |
 | grafana | grafana | установка grafana |
+| alertnamager | alertnamager | установка alertnamager |
+
+* после установки alertnamager может не запуститься ( systemctl daemon-reload)
+
+
 
 Example Playbook
 ----------------

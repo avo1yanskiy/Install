@@ -104,4 +104,8 @@
 
 - name: Alertmanager
   include: alertmanager.yaml
+
+- name: Grafana
+  include: grafana.yaml
+
        

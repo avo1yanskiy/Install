@@ -17,3 +17,10 @@ alerting:
     - static_configs:
         - targets:
           - localhost:9093
+
+rule_files:
+# - "netology.yaml"
+# - "system.rules.yml"
+# - "web.rules.yml"
+# - "services.rules.yml"
+  - "/etc/prometheus/rules.d/*.rules.yml"

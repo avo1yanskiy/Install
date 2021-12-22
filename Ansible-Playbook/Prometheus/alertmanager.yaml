@@ -90,7 +90,7 @@
     - name: alertmanager serives restart
       become: yes
       ansible.builtin.service:
-        name: alertmanager
+        name: prometheus-alertmanager
         state: restarted
         enabled: yes
     
