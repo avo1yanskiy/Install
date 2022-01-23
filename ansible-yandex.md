@@ -20,10 +20,10 @@ sudo apt -y install ansible
 
 echo 'Terraform'
 
-wget https://releases.hashicorp.com/terraform/1.1.3/terraform_1.1.3_linux_arm64.zip
+sudo apt update && sudo apt install -y gnupg software-properties-common curl
 
-unzip terraform_1.1.3_linux_arm64.zip
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 
-sudo mv terraform /usr/local/bin/
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
-terraform version
+sudo apt update && sudo apt -y install terraform
