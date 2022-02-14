@@ -35,5 +35,5 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-
 
 sudo chmod +x /usr/local/bin/docker-compose
 
-echo "Good luck Luck Sky Walker"
+echo 'Good luck Luck Sky Walker!!!'
 ```
