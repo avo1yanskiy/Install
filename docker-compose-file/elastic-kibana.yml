@@ -2,7 +2,7 @@ version: "3.0"
 services:
   elasticsearch:
     container_name: es-container
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    image: elasticsearch:7.17.6
     environment:
       - xpack.security.enabled=false
       - "discovery.type=single-node"
@@ -12,7 +12,7 @@ services:
       - 9200:9200
   kibana:
     container_name: kb-container
-    image: docker.elastic.co/kibana/kibana:7.11.0
+    image: kibana:7.17.6
     environment:
       - ELASTICSEARCH_HOSTS=http://es-container:9200
     networks:
@@ -21,6 +21,29 @@ services:
       - elasticsearch
     ports:
       - 5601:5601
+  metricbeat-demo:
+    hostname: metricbeat-demo
+    container_name: metricbeat-demo
+    image: elastic/metricbeat:7.17.6
+    ports:
+      - 5366:5066
+    user: root
+    cap_add:
+      - SYS_PTRACE
+      - DAC_READ_SEARCH
+    volumes:
+      - /opt/mic/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro
+      - data_metricbeat_demo:/usr/share/metricbeat/data
+    command: [ '-e', '-v', '--strict.perms=false', '-system.hostfs=/hostfs' ]
+    networks:
+      - es-net
+volumes:
+  data_metricbeat_demo:
 networks:
   es-net:
     driver: bridge
